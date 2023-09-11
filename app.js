@@ -9,6 +9,7 @@ var debug = require('debug')('dwpcii-2023b:server');
 //Registro de middlwares de aplicacion
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var aboutRouter = require('./routes/about');
 
 //Creando la instancia de express
 var app = express();
@@ -29,6 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 //Activa usersRouter cuando se solicita el recurso "/users"
 app.use('/users', usersRouter);
+//Activando aboutRouter
+app.use('/about',aboutRouter);
 
 //Mi propio middleware con su request response
 //app.use('/author', (request,response) => {
