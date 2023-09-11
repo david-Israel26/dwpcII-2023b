@@ -9,6 +9,8 @@ var debug = require('debug')('dwpcii-2023b:server');
 //Registro de middlwares de aplicacion
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+//Nueva ruta
+var aboutRouter = require('./routes/about.js')
 
 //Creando la instancia de express
 var app = express();
@@ -22,13 +24,15 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-//Crea un server de archivos estaticos
-app.use(express.static(path.join(__dirname, 'public')));
+//Crea un server de archivos estaticos-archivos css
+app.use(express.static(path.join(__dirname,'..','public')));
 
 //Middlewares para enrutar con su enrutador
 app.use('/', indexRouter);
 //Activa usersRouter cuando se solicita el recurso "/users"
 app.use('/users', usersRouter);
+//Activa aboutRouter
+app.use('/about',aboutRouter);
 
 //Mi propio middleware con su request response
 //app.use('/author', (request,response) => {
