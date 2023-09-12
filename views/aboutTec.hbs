@@ -9,7 +9,7 @@
         crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" src="estilo.css">
+    <link rel="stylesheet" href="">
     <title>About Tec</title>
 
     <script>
@@ -23,41 +23,14 @@
         }
     </script>
     <style>
-        .container {
-            display: grid;
-            place-content: center;
-        }
 
-        .p {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 12px;
-        }
-
-        .contenedor {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .img {
-            width: 400px;
-            height: 400px;
-            border: 2px solid #333;
-            border-radius: 10px;
-        }
-
-        h1 {
-            font-size: 20px;
-            font-family: 'Times New Roman', Times, serif;
-        }
     </style>
 </head>
 
 <body onload="aleatorio()">
     <div class="container">
         <header>
-            <h1>Instituto Tecnologico Gustavo A. Madero</h1>
+            <h1>{{name}}</h1>
         </header>
         <p class="p">El Tecnológico Nacional de México (TecNM) es una Institución de Educación Superior Tecnológica,
             órgano desconcentrado de la Secretaria de Educación Pública (SEP), que fue creada por decreto presidencial
