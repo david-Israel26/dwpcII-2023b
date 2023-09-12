@@ -1,21 +1,22 @@
+body{
+    background-color: rgb(194, 188, 180);
+    padding: auto;
+}
 .container {
     display: grid;
     place-content: center;
 }
-
 .p {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
 }
-
 .contenedor {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
-
-.img {
+.imagen {
     width: 400px;
     height: 400px;
     border: 2px solid #333;
@@ -23,6 +24,23 @@
 }
 
 h1 {
-    font-size: 20px;
+    font-size: 30px;
     font-family: 'Times New Roman', Times, serif;
+    align-items: center;
+}
+h2{
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    align-items: right;
+}
+p{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: justify;
+    text-justify: inter-word;
+}
+.containerTitle{
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

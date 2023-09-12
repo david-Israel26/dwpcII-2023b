@@ -5,24 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documento</title>
-    <style>
-        .p{
-            font-family: Arial, Helvetica, sans-serif;
-            text-align: justify;
-            text-justify: inter-word;
-        }
-    </style>
+      <link rel="stylesheet" href="/stylesheets/estilos.css">
 </head>
 
 <body>
-    <h1>{{name}}</h1>
-    <img src="{{imagen}}" width="305" height="312">
+    <div class="containerTitle">
+     <h1>{{name}}</h1>
+    </div>
     <h2>Descripción:</h2>
     <p>{{description}}</p>
     <h2>Misión</h2>
     <p>{{missions}}</p>
     <h2>Valores</h2>
     <p>{{values}}</p>
+    <div class="container">
+     <img src="{{imagen}}" width="305" height="312" class="imagen">
+    </div>
 </body>
-
 </html>
