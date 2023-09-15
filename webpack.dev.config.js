@@ -1,21 +1,28 @@
-//Importanto el modulo path
+//Importar el administrador de archivos llamado path
 const path = require('path');
 
-//Exportamos un objeto de configuración Configuration Options Object
-module.exports = {
-    //-> Estableciendo el modo de produccion
-    mode: 'production',
-    //Estableciendo el archivo indexador del front-end
+//Exportacion del objeto de configuracion usado por el webpack
+module.exports= {
+    //Archivo de entrada
     entry: "./client/index.js",
-    //Estableciendo el archivo de salida
+    //Cual sera el archivo de salida
     output: {
         //Ruta absoluta de salida
-        path: path.resolve(__dirname, "public"),
+        path: path.resolve(__dirname,"public"),
         //Nombre del archivo de salida
-        filename: "bundle.js",
+        filename: "bundle.js"
     },
-       //Agregando un modulo a webpack
-       module:{
+    //Configuracion de servidor de desarrollo
+    devServer: {
+        //Folder de archivos estaticos
+        static: path.join(__dirname,"public"),
+        //Definiendo el puerto del servidor
+        port: 8080,
+        //Definiendo el host
+        host: "0.0.0.0"
+    },
+    //Agregando un modulo a webpack
+    module:{
         rules: [
             {
                 test: /\.js$/,
