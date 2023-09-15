@@ -6,7 +6,8 @@
     "start": "node ./dist/bin/www",
     "dev": "DEBUG=dwpcii-2023b:server && babel-watch ./server/bin/www",
     "build": "npm run clean && babel ./server --out-dir dist --copy-files",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist",
+    "devc": "NODE_ENV=development && webpack serve --config ./webpack.dev.config.js --mode development"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
