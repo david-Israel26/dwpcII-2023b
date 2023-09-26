@@ -8,11 +8,11 @@
     "clean": "rm -rf ./dist",
     "devc": "NODE_ENV=development webpack serve --config ./webpack.dev.config.js --mode development",
     "cleans": "rm -rf dist",
-    "cleanc": "rm -f ./public/bundle.js",
-    "b:s": "npm run cleans && babel ./server --out-dir dist --copy-files",
-    "b:c": "npm run cleanc && webpack --config ./webpack.config.js --mode production",
+    "cleanc": "rm -f ./public/bundle.js ./public/styles/app.css",
+    "builds": "npm run cleans && babel ./server --out-dir dist --copy-files",
+    "buildc": "npm run cleanc && webpack --config ./webpack.config.js --mode production",
     "itgam": "ls",
-    "build": "npm run b:c && npm run b:s"
+    "build": "npm run buildc && npm run builds"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -21,8 +21,8 @@
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "webpack-dev-middleware": "^6.0.2",
-    "webpack-hot-middleware": "^2.25.3"
+    "webpack-dev-middleware": "^6.1.1",
+    "webpack-hot-middleware": "^2.25.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.15",
@@ -32,8 +32,10 @@
     "babel-loader": "^9.1.3",
     "babel-watch": "^7.8.1",
     "core-js": "^3.32.2",
-    "webpack": "^5.76.1",
-    "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.11.1"
+    "css-loader": "^6.8.1",
+    "mini-css-extract-plugin": "^2.7.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   }
 }
