@@ -1,6 +1,8 @@
 //Importar el administrador de archivos llamado path
 const path = require('path');
 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 //Exportacion del objeto de configuracion usado por el webpack
 module.exports= {
     //Archivo de entrada
@@ -45,7 +47,14 @@ module.exports= {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
             }
         ]
-    }
+    },
+    plugins:[new MiniCssExtractPlugin({
+        filename:'styles/app.css'
+    })]
 }

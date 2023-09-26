@@ -1,6 +1,6 @@
 //Importanto el modulo path
 const path = require('path');
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 //Exportamos un objeto de configuración Configuration Options Object
 module.exports = {
     //-> Estableciendo el modo de produccion
@@ -38,7 +38,16 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
             }
         ]
-    }
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'styles/app.js'
+        })
+    ]
 }
