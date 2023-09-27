@@ -4,14 +4,55 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var debug = require('debug')('dwpcii-2023b:server');
+
+//Importando el debug a el archivo app.js
+import debug from './services/debugLogger';
 
 //Registro de middlwares de aplicacion
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+// Estableciendo los modulos webpack
+import webpack from 'webpack';
+import WebpackDevMiddleware from 'webpack-dev-middleware';
+import WebpackHotMiddleware from 'webpack-hot-middleware';
+// Importando la configuracion del modulo webpack
+import webpackConfig from '../webpack.dev.config';
+///***/
+
 //Creando la instancia de express
 var app = express();
+
+//Modo de ejecucion
+const nodeEnviroment = process.env.NODE_ENV || 'production'
+
+// En caso que la aplicacion se ejecute en modo de desarrollo
+// se realiza lo siguiente
+if(nodeEnviroment === 'development'){
+  // Mensaje de que se comienza a ejecutar el modo de desarrollo
+  debug("Ejecutando en modo desarrollo 🛠️");
+  // Estableciendo el entorno de node al modo de webpack
+  webpackConfig.mode = nodeEnviroment;
+  // Emparejando el puerto de webpack con el de node
+  webpackConfig.devServer.port = process.env.PORT;
+  // Setting up the HMR (Hot Module Replacement)
+  webpackConfig.entry = [
+    "webpack-hot-middleware/client?reload=true&timeout=1000",
+    webpackConfig.entry
+  ];
+	// Se agrega el plugin de la configuracion de desarrollo de webpack
+  webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+  // Se crea el archivo bundle y se guarda en una constante
+  const bundle = webpack(webpackConfig);
+  // Permitiendo el uso del middleware
+  app.use( WebpackDevMiddleware(bundle, {
+    publicPath: webpackConfig.output.publicPath
+  }) );
+  //  Enabling the webpack HMR
+  app.use( WebpackHotMiddleware(bundle) );
+}else{
+  console.log("Ejecutando en modo producción 🪖");
+}
 
 // Configurando el motor de plantillas
 app.set('views', path.join(__dirname, 'views'));
