@@ -1,13 +1,12 @@
-const express = require('express');
+import express from 'express';
 
 const router = express.Router();
-
-/* GET "/" page */
-router.get('/', (res) => {
+/* GET (recurso raiz) */
+router.get('/', (req, res) => {
   res.render('index', {
-    title: 'Instituto Tecnologíco Gustavo A. Madero',
-    author: 'David Israel González Osorio 🤠',
-  });
+    title: 'Instituto Tecnologico Gustavo A. Madero',
+    author: 'David Israel Gonzalez Osorio',
+  }); /// render trae las vista y contesta con un html
 });
 
-module.exports = router;
+export default router;

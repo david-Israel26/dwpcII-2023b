@@ -1,19 +1,14 @@
-const express = require('express');
+import express from 'express';
 
 const router = express.Router();
 
-//  Primero se activa usersRouter con la peticion /users
-/* GET /users */
-router.get('/', (res) => {
+// GET /users
+router.get('/', (req, res) => {
   res.send('respond with a resource');
 });
-
-//  GET /users/author
+// para que se ejecute se debe de entar a un get de /users y despues a /author
 router.get('/author', (_, res) => {
-  //  Mandando a llamar a la vista author
-  res.render('author', {
-    Author: 'David González',
-  });
+  res.render('author', { author: 'David Israel Gonzalez Osorio' });
 });
 
-module.exports = router;
+export default router;

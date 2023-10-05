@@ -7,6 +7,9 @@ import WebpackHotMiddleware from 'webpack-hot-middleware';
 import debug from './services/debugLogger';
 // Importando la configuracion del modulo webpack
 import webpackConfig from '../webpack.dev.config';
+// Registro de middlwares de aplicacion
+import indexRouter from './routes/index';
+import usersRouter from './routes/users';
 
 // Solo cargando dependencias
 const createError = require('http-errors');
@@ -14,10 +17,6 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
-// Registro de middlwares de aplicacion
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 
 // Creando la instancia de express
 const app = express();
