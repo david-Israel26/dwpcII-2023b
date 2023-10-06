@@ -9,6 +9,7 @@
     "devc": "NODE_ENV=development webpack serve --config ./webpack.dev.config.js --mode development",
     "cleans": "rm -rf dist",
     "cleanc": "rm -f ./public/bundle.js ./public/styles/app.css",
+    "clean:logs": "rm -rf ./server/logs/*.log",
     "builds": "npm run cleans && babel ./server --out-dir dist --copy-files",
     "buildc": "npm run cleanc && webpack --config ./webpack.config.js --mode production",
     "itgam": "ls",
@@ -27,7 +28,8 @@
     "morgan": "~1.9.1",
     "webpack": "^5.88.2",
     "webpack-dev-middleware": "^6.1.1",
-    "webpack-hot-middleware": "^2.25.4"
+    "webpack-hot-middleware": "^2.25.4",
+    "winston": "^3.10.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.15",

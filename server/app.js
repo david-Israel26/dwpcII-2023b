@@ -3,10 +3,14 @@ import webpack from 'webpack';
 // Estableciendo los modulos webpack
 import WebpackDevMiddleware from 'webpack-dev-middleware';
 import WebpackHotMiddleware from 'webpack-hot-middleware';
+// Libreria morgan
+import morgan from 'morgan';
 // Importando el debug a el archivo app.js
 import debug from './services/debugLogger';
 // Importando la configuracion del modulo webpack
 import webpackConfig from '../webpack.dev.config';
+// Importando el logger de winston
+import log from './config/winston';
 // Registro de middlwares de aplicacion
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
@@ -16,7 +20,10 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+
+// Creando variable del directorio raiz
+// eslint-disable-next-line
+global["__rootdir"] = path.resolve(process.cwd());
 
 // Creando la instancia de express
 const app = express();
@@ -58,8 +65,11 @@ if (nodeEnviroment === 'development') {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+// Conexion de Winston con Morgan
+app.use(morgan('dev', { stream: log.stream }));
+
 // Se establecen los middlewares
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -74,6 +84,7 @@ app.use('/users', usersRouter);
 // catch 404 and forward to error handler
 //  Middlware de error
 app.use((req, res, next) => {
+  log.info(`404 Pagina no encontrada ${req.method} ${req.originalUrl}`);
   next(createError(404));
 });
 
@@ -85,6 +96,7 @@ app.use((err, req, res) => {
 
   // render the error page
   res.status(err.status || 500);
+  log.error(`${err.status || 500} - ${err.message}`);
   res.render('error');
 });
 
