@@ -79,7 +79,7 @@ function onError(error) {
 
 function onListening() {
   const addr = server.address();
-  log.info(`👂📣Listening on ${process.env.APP_URL}:${addr.port}`);
+  log.info(`👂📣Listening on port:${addr.port}`);
 }
 
 server.listen(port);

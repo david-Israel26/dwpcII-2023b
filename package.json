@@ -25,6 +25,7 @@
     "express": "~4.16.1",
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
+    "materialize-css": "^1.0.0-rc.2",
     "morgan": "~1.9.1",
     "webpack": "^5.88.2",
     "webpack-dev-middleware": "^6.1.1",
