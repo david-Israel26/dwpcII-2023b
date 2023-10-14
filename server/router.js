@@ -9,6 +9,7 @@ import log from './config/winston';
 const addRoutes = (app) => {
   // Agregando enrutador de Home
   app.use('/', homeRouter);
+
   // catch 404 and forward to error handler
   //  Middlware de error
   app.use((req, res, next) => {
@@ -27,6 +28,7 @@ const addRoutes = (app) => {
     log.error(`${err.status || 500} - ${err.message}`);
     res.render('error');
   });
+
   return app;
 };
 
