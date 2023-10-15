@@ -11,3 +11,15 @@ body{
   h1{
     color: teal;
   }
+
+  #brand-logo-img
+  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  #brand-logo-img img{
+    margin-right: 10px;
+  }
