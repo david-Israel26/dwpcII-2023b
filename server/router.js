@@ -2,6 +2,12 @@
 import createError from 'http-errors';
 // Importando enrutador home
 import homeRouter from './domains/home/home.router';
+// Importando enrutador user
+import userRouter from './domains/user/user.router';
+// Importando enrutador de projectos
+import projectRouter from './domains/project/project.router';
+// Importando enrutador de about
+// import aboutRouter from './domains/about/about.router';
 // Import winston logger
 import log from './config/winston';
 
@@ -9,6 +15,12 @@ import log from './config/winston';
 const addRoutes = (app) => {
   // Agregando enrutador de Home
   app.use('/', homeRouter);
+  // Agregando ruta user
+  app.use('/user', userRouter);
+  // Agregando ruta project
+  app.use('/project', projectRouter);
+  // Agregando ruta about
+  // app.use('/about', aboutRouter);
 
   // catch 404 and forward to error handler
   //  Middlware de error
