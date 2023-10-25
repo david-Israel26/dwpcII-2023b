@@ -7,7 +7,6 @@ const showDashboard = (request, response) => {
 const addForm = (request, response) => {
   response.send('🏗️ En construccion rutas para añadir projectos');
 };
-
 // Controlador Home
 export default {
   showDashboard,
