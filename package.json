@@ -19,6 +19,7 @@
     "@babel/eslint-parser": "^7.22.15",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^16.3.1",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-webpack-plugin": "^4.0.1",
