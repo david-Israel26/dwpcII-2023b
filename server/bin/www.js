@@ -5,6 +5,7 @@
  */
 import http from 'http';
 // import debug from '../services/debugLogger';
+import { constants } from 'buffer';
 import app from '../app';
 
 // Importando a winston logger
@@ -12,6 +13,9 @@ import log from '../config/winston';
 
 // Importando llaves de configuracion - Importing configuration keys
 import configKeys from '../config/configKeys';
+
+// Importing db connection function
+import connectWithRetry from '../database/mongooseConnection';
 
 /**
  * Get port from environment and store in Express.
@@ -84,6 +88,9 @@ function onListening() {
   const addr = server.address();
   log.info(`👂📣Listening on port:${addr.port}`);
 }
+
+// Launching db connection
+connectWithRetry(configKeys.MONGO_URL);
 
 server.listen(port);
 // Registrando eventos del servidor
