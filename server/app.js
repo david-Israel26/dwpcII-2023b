@@ -3,7 +3,8 @@ import webpack from 'webpack';
 // Estableciendo los modulos webpack
 import WebpackDevMiddleware from 'webpack-dev-middleware';
 import WebpackHotMiddleware from 'webpack-hot-middleware';
-
+// Importando mongoose
+import mongoose from 'mongoose';
 // Libreria morgan
 import morgan from 'morgan';
 
@@ -66,6 +67,19 @@ if (nodeEnviroment === 'development') {
 
 // Configurando el motor de plantillas
 configTemplateEngine(app);
+
+// Database connection checker
+app.use((request, response, next) => {
+  if (mongoose.connection.readyState === 1) {
+    log.info('✅ Verificación de conexión a DB exitosa');
+    next();
+  } else {
+    response.status(503).render('errors/e503View', {
+      url: 'https://i.postimg.cc/MKZsMhWQ/Arona.jpg',
+      layout: 'errors',
+    });
+  }
+});
 
 // Conexion de Winston con Morgan
 app.use(morgan('dev', { stream: log.stream }));
