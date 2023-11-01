@@ -5,7 +5,7 @@ const showDashboard = (request, response) => {
 };
 // GET project/add-form
 const addForm = (request, response) => {
-  response.send('🏗️ En construccion rutas para añadir projectos');
+  response.render('project/addView');
 };
 // Controlador Home
 export default {
