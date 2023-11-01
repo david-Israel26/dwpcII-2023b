@@ -68,14 +68,21 @@ if (nodeEnviroment === 'development') {
 // Configurando el motor de plantillas
 configTemplateEngine(app);
 
-// Database connection checker
+// Database connection checker Middleware
+// Haciendo uso de app.use dando como parametro la base de los middleware request, response, next
 app.use((request, response, next) => {
+  // Haciendo uso de la propiead Connection.prototype.readyState
+  // Asegurandonos que este conectada con el valor 1. (0=disconnected,1=connected,2=connecting)
   if (mongoose.connection.readyState === 1) {
+    // Mostrar mensaje en el logger
     log.info('✅ Verificación de conexión a DB exitosa');
+    // Pasar al siguiente middleware
     next();
   } else {
+    // Renderiza una vista de error con el codigo 503 Service Unavailable
     response.status(503).render('errors/e503View', {
       url: 'https://i.postimg.cc/MKZsMhWQ/Arona.jpg',
+      // Para evitar mostrar el layout main
       layout: 'errors',
     });
   }
@@ -85,7 +92,6 @@ app.use((request, response, next) => {
 app.use(morgan('dev', { stream: log.stream }));
 
 // Se establecen los middlewares
-// app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
