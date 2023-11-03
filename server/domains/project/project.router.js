@@ -8,17 +8,14 @@ import projectController from './project.controller';
 const router = new Router();
 
 // Enrutamos
-// GET /project/projects
-router.get(['/projects'], projectController.showDashboard);
-
-// GET /project/dashboard
-router.get(['/dashboard'], projectController.showDashboard);
-
-// GET /project/add-form
-router.get(['/add-form'], projectController.addForm);
+// GET /project
+router.get(['/'], projectController.showDashboard);
 
 // GET /project/add
-router.get(['/add'], projectController.addForm);
+router.get(['/add'], projectController.add);
+
+// POST /project/add
+router.post('/add', projectController.addPost);
 
 // Exportar el tramo de ruta
 export default router;
