@@ -17,5 +17,8 @@ router.get(['/add'], projectController.add);
 // POST /project/add
 router.post('/add', projectController.addPost);
 
+// GET /project/projects
+router.get(['/projects'], projectController.showDashboard);
+
 // Exportar el tramo de ruta
 export default router;
