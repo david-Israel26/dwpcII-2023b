@@ -1,3 +1,6 @@
+// Importando el logger de winston
+import log from '../../config/winston';
+
 // Metodos de accion
 // GET project/dashboard
 const showDashboard = (request, response) => {
@@ -11,15 +14,19 @@ const add = (request, response) => {
 
 // Consultando POST /project/add
 const addPost = (request, response) => {
-  // Extrayendo la informacion del formulario
-  // Request body - Viene de dos middleware en app.js lo cual rescata los
-  // elementos del body del formulario
-  const { name, description } = request.body;
-  // Regresando al cliente la informacion recabada
-  response.status(200).json({
-    name,
-    description,
-  });
+  // Informacion de validacion - errorData
+  const { errorData: validationError } = request;
+  // En caso de error se informa
+  if (validationError) {
+    log.info('Se entrega al cliente error de validacion de add Project 🎟️');
+    response.status(422).json(validationError);
+  } else {
+    // En caso de pasar la informacion
+    // Desestructurando la informacion
+    const { validData: project } = request;
+    // Se contesta la informacion en forma json
+    response.status(200).json(project);
+  }
 };
 
 // Controlador User

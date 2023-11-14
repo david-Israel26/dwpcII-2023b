@@ -33,7 +33,8 @@
     "webpack": "^5.88.2",
     "webpack-dev-middleware": "^6.1.1",
     "webpack-hot-middleware": "^2.25.4",
-    "winston": "^3.10.0"
+    "winston": "^3.10.0",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.15",
