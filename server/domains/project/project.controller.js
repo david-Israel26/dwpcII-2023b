@@ -19,7 +19,17 @@ const addPost = (request, response) => {
   // En caso de error se informa
   if (validationError) {
     log.info('Se entrega al cliente error de validacion de add Project 🎟️');
-    response.status(422).json(validationError);
+    // Desestructuracion de los datos de validacion
+    const { value: project } = validationError;
+    // Reduciendo el objeto errorData
+    const errorModel = validationError.inner.reduce((preview, current) => {
+      // Creando una variable temporal para evitar el error
+      // "no-param-reassing"
+      const workingPrev = preview;
+      workingPrev[`${current.path}`] = current.message;
+      return workingPrev;
+    }, {});
+    response.status(422).json({ project, errorModel });
   } else {
     // En caso de pasar la informacion
     // Desestructurando la informacion
