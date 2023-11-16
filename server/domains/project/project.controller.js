@@ -29,14 +29,15 @@ const addPost = (request, response) => {
       workingPrev[`${current.path}`] = current.message;
       return workingPrev;
     }, {});
-    response.status(422).json({ project, errorModel });
-  } else {
-    // En caso de pasar la informacion
-    // Desestructurando la informacion
-    const { validData: project } = request;
-    // Se contesta la informacion en forma json
-    response.status(200).json(project);
+    return response
+      .status(422)
+      .render('project/addView', { project, errorModel });
   }
+  // En caso de que pase la validacion se desestructura
+  // la informacion de la peticion
+  const { validData: project } = request;
+  // Se contesta la informacion del proyecto al cliente
+  return response.status(200).json(project);
 };
 
 // Controlador User
