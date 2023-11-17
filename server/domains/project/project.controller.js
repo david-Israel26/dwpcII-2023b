@@ -1,6 +1,9 @@
 // Importando el logger de winston
 import log from '../../config/winston';
 
+// Importando el modelo
+import ProjectModel from './project.model';
+
 // Metodos de accion
 // GET project/dashboard
 const showDashboard = (request, response) => {
@@ -13,7 +16,7 @@ const add = (request, response) => {
 };
 
 // Consultando POST /project/add
-const addPost = (request, response) => {
+const addPost = async (request, response) => {
   // Informacion de validacion - errorData
   const { errorData: validationError } = request;
   // En caso de error se informa
@@ -36,8 +39,19 @@ const addPost = (request, response) => {
   // En caso de que pase la validacion se desestructura
   // la informacion de la peticion
   const { validData: project } = request;
-  // Se contesta la informacion del proyecto al cliente
-  return response.status(200).json(project);
+
+  // Creando la instancia de un documento con valores de project
+  const projectDocument = new ProjectModel(project);
+  try {
+    // Se guarda el documento en la coleccion correspondiente con 'save'
+    const savedProject = await projectDocument.save();
+    // Se contesta la informacion del proyecto al cliente
+    log.info('Se entrega al cliente información del proyecto');
+    return response.status(200).json(savedProject);
+  } catch (error) {
+    log.error('Error al guardar el proyecto en la base de datos');
+    return response.status(500).json(error);
+  }
 };
 
 // Controlador User
