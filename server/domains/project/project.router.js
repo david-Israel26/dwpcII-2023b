@@ -23,6 +23,19 @@ router.get(['/showDashboard'], projectController.showDashboard);
 // GET /project/add
 router.get(['/add'], projectController.add);
 
+// GET /project/edit/:id
+router.get('/edit/:id', projectController.edit);
+
+// PUT "/project/edit/:id"
+router.put(
+  '/edit/:id',
+  ValidateFactory({
+    schema: projectValidator.projectSchema,
+    getObject: projectValidator.getProject,
+  }),
+  projectController.editPut
+);
+
 // POST /project/add
 // Post middleware de validacion
 router.post(

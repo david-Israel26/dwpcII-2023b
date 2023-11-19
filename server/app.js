@@ -8,6 +8,9 @@ import mongoose from 'mongoose';
 // Libreria morgan
 import morgan from 'morgan';
 
+// Importando method-override
+import methodOverride from 'method-override';
+
 // Importando template-engine
 import configTemplateEngine from './config/templateEngine';
 
@@ -95,6 +98,8 @@ app.use(morgan('dev', { stream: log.stream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// Permitiendo verbos HTML post & delete
+app.use(methodOverride('_method'));
 // Crea un server de archivos estaticos-archivos css
 app.use(express.static(path.join(__dirname, '..', 'public')));
 

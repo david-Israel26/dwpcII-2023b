@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col s12 m10 offset-m1 18 offset-12">
+        <div class="card">
+            <div class="card-image">
+                <img src="/images/addproject.png" alt="">
+                <span 
+                class="card-title add-project"
+                style="font-weight: bolder;"
+                >
+                    Editar Proyecto
+                </span>
+            </div>
+            <!-- "Forzando a el formulario a realizar un metodo put (actualizacion) como si fuera un nuevo proyecto 
+                Esto se logra añadiendo ?_method=put y en method=post -->
+            <form autocomplete="off" action="/project/edit/{{ project._id }}?_method=put" method="post">
+            <div class="card-content">
+                <div class="input-field">
+                    <label for="project-name">
+                        Nombre del proyecto
+                    </label>
+                    <input 
+                    type="text"
+                    id="project-name"
+                    name="name"
+                    class="validate"
+                    placeholder="Nombre del proyecto"
+                    value= "{{project.name}}"
+                    required
+                    />
+                    <span
+                    class="helper-text"
+                    data-error="Es necesario ingresar el nombre del proyecto"
+                    data-success="🆗 Correcto"
+                    ></span>
+                </div>
+                <div class="input-field">
+                    <label for="project-description">
+                        Descripcion del proyecto
+                    </label>
+                    <textarea 
+                    name="description" 
+                    id="project-description" 
+                    class="materialize-textarea validate"
+                    required
+                    >{{project.description}}</textarea>
+                    <span
+                    class="helper-text"
+                    data-error="Debe ingresar una descripción"
+                    data-success="🆗 Correcto"
+                    >
+                    </span>
+                </div>
+            </div>
+            <div class="card-action">
+                <button type="submit" class="blue darken-3 waves-effect waves-light btn">
+                    <i class="material-icons left">edit</i> Editar
+                </button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
