@@ -5,9 +5,12 @@ import log from '../../config/winston';
 import ProjectModel from './project.model';
 
 // Metodos de accion
-// GET project/dashboard
-const showDashboard = (request, response) => {
-  response.send('🏗️ En construccion rutas para mostrar proyectos');
+// GET project/showDashboard
+const showDashboard = async (request, response) => {
+  // Consultando todos los proyectos
+  const projects = await ProjectModel.find({}).lean().exec();
+  // Enviando los proyectos al cliente en JSON
+  response.render('project/dashboardViews', { projects });
 };
 
 // GET project/add
@@ -45,9 +48,11 @@ const addPost = async (request, response) => {
   try {
     // Se guarda el documento en la coleccion correspondiente con 'save'
     const savedProject = await projectDocument.save();
-    // Se contesta la informacion del proyecto al cliente
-    log.info('Se entrega al cliente información del proyecto');
-    return response.status(200).json(savedProject);
+    // Se informa al cliente del guardado del proyecto
+    log.info(`Se carga el proyecto ${savedProject}`);
+    log.info('Se redirecciona al cliente a la ruta /project');
+    // Se redirecciona el sistema a la ruta '/project'
+    return response.redirect('/project/showDashboard');
   } catch (error) {
     log.error('Error al guardar el proyecto en la base de datos');
     return response.status(500).json(error);

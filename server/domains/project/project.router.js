@@ -17,6 +17,9 @@ const router = new Router();
 // GET /project
 router.get(['/'], projectController.showDashboard);
 
+// GET /project/showDashboard
+router.get(['/showDashboard'], projectController.showDashboard);
+
 // GET /project/add
 router.get(['/add'], projectController.add);
 
@@ -30,9 +33,6 @@ router.post(
   }),
   projectController.addPost
 );
-
-// GET /project/projects
-router.get(['/projects'], projectController.showDashboard);
 
 // Exportar el tramo de ruta
 export default router;
