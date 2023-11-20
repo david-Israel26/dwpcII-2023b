@@ -53,6 +53,8 @@ const addPost = async (request, response) => {
     // Se informa al cliente del guardado del proyecto
     log.info(`Se carga el proyecto ${savedProject}`);
     log.info('Se redirecciona al cliente a la ruta /project');
+    // Agregando mensaje Flash Creacion de proyecto
+    request.flash('successMessage', 'Proyecto agregado con exito!');
     // Se redirecciona el sistema a la ruta '/project'
     return response.redirect('/project/showDashboard');
   } catch (error) {
@@ -85,7 +87,8 @@ const edit = async (request, response) => {
   }
 };
 
-// Actualizar el proyecto
+// PUT /project/edit/:id
+// Actualizando el proyecto creado
 const editPut = async (request, response) => {
   const { id } = request.params;
   const { errorData: validationError } = request;
@@ -117,6 +120,8 @@ const editPut = async (request, response) => {
     // Se salvan los cambios
     log.info(`Actualizando proyecto con ID:${id}`);
     await project.save();
+    // Generando mensaje FLASH
+    request.flash('successMessage', 'Proyecto editado con exito');
     return response.redirect(`/project/edit/${id}`);
   } catch (error) {
     log.error(`Error al actualizar el proyecto con el ID:${id}`);
@@ -132,6 +137,8 @@ const deleteProject = async (request, response) => {
   try {
     // De nuestro modelo usa la operacion findByIdAndRemove
     const result = await ProjectModel.findByIdAndRemove(id);
+    // Mensaje Flash
+    request.flash('successMessage', 'Proyecto borrado con exito!');
     return response.status(200).json(result);
   } catch (error) {
     return response.status(500).json(error);

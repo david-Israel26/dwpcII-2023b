@@ -18,6 +18,10 @@ import configTemplateEngine from './config/templateEngine';
 import debug from './services/debugLogger';
 // Importando la configuracion del modulo webpack
 import webpackConfig from '../webpack.dev.config';
+
+// Importando el configurador de sesiones
+import configSessions from './config/configSessions';
+
 // Importando el logger de winston
 import log from './config/winston';
 // Importando enrutador
@@ -100,6 +104,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // Permitiendo verbos HTML post & delete
 app.use(methodOverride('_method'));
+
+// Habilitando el manejo de sesiones y mensajes flash
+configSessions(app);
+
 // Crea un server de archivos estaticos-archivos css
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
