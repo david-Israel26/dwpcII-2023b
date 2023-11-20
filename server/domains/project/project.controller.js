@@ -124,6 +124,20 @@ const editPut = async (request, response) => {
   }
 };
 
+// Delete /project/:id
+const deleteProject = async (request, response) => {
+  // Extrayendo el ID de los parametros
+  const { id } = request.params;
+  // Usando el modelo para borrar el proyecto
+  try {
+    // De nuestro modelo usa la operacion findByIdAndRemove
+    const result = await ProjectModel.findByIdAndRemove(id);
+    return response.status(200).json(result);
+  } catch (error) {
+    return response.status(500).json(error);
+  }
+};
+
 // Controlador User
 export default {
   // Action Methods
@@ -132,4 +146,5 @@ export default {
   addPost,
   edit,
   editPut,
+  deleteProject,
 };
