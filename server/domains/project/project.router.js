@@ -26,7 +26,7 @@ router.get(['/add'], projectController.add);
 // GET /project/edit/:id
 router.get('/edit/:id', projectController.edit);
 
-// PUT "/project/edit/:id"
+// PUT "/project/edit/:id" Actualizar
 router.put(
   '/edit/:id',
   ValidateFactory({
@@ -36,7 +36,7 @@ router.put(
   projectController.editPut
 );
 
-// POST /project/add
+// POST /project/add Agregar
 // Post middleware de validacion
 router.post(
   '/add',
@@ -47,7 +47,7 @@ router.post(
   projectController.addPost
 );
 
-// DELETE '/project/:id'
+// DELETE '/project/:id' Borrar
 router.delete('/:id', projectController.deleteProject);
 
 // Exportar el tramo de ruta
