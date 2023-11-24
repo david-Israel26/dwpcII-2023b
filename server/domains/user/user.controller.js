@@ -17,9 +17,21 @@ const register = (request, response) => {
   log.info('Enviando el formulario de registro');
   response.render('user/register');
 };
+
+// Estableciendo el metodo POST para registros
+const registerPost = (request, response) => {
+  const { validData, errorData } = request;
+  log.info('Se procesa el formulario de registro');
+  response.json({
+    validData,
+    errorData,
+  });
+};
+
 // Controlador Login
 export default {
   login,
   logout,
   register,
+  registerPost,
 };
