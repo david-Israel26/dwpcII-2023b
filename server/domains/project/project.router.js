@@ -17,10 +17,26 @@ const router = new Router();
 // GET /project
 router.get(['/'], projectController.showDashboard);
 
+// GET /project/showDashboard
+router.get(['/showDashboard'], projectController.showDashboard);
+
 // GET /project/add
 router.get(['/add'], projectController.add);
 
-// POST /project/add
+// GET /project/edit/:id
+router.get('/edit/:id', projectController.edit);
+
+// PUT "/project/edit/:id" Actualizar
+router.put(
+  '/edit/:id',
+  ValidateFactory({
+    schema: projectValidator.projectSchema,
+    getObject: projectValidator.getProject,
+  }),
+  projectController.editPut
+);
+
+// POST /project/add Agregar
 // Post middleware de validacion
 router.post(
   '/add',
@@ -31,8 +47,8 @@ router.post(
   projectController.addPost
 );
 
-// GET /project/projects
-router.get(['/projects'], projectController.showDashboard);
+// DELETE '/project/:id' Borrar
+router.delete('/:id', projectController.deleteProject);
 
 // Exportar el tramo de ruta
 export default router;
