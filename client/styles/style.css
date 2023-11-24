@@ -36,3 +36,9 @@ body{
     bottom: 70%;
     left: 40%;
   }
+
+  .logo
+  {
+    width: 130px;
+    margin: auto;
+  }
