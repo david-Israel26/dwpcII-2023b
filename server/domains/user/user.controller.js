@@ -1,5 +1,7 @@
 // Importando el logger de winston
 import log from '../../config/winston';
+// Importando el modelo de Usuario
+import User from './user.model';
 
 // Metodos de accion
 // GET "user/login"
@@ -19,13 +21,30 @@ const register = (request, response) => {
 };
 
 // Estableciendo el metodo POST para registros
-const registerPost = (request, response) => {
-  const { validData, errorData } = request;
+const registerPost = async (request, response) => {
+  // Renombrar la variable que contiene los datos del usuario
+  // validData pasa a ser userFormData
+  const { validData: userFormData, errorData } = request;
   log.info('Se procesa el formulario de registro');
-  response.json({
-    validData,
-    errorData,
-  });
+  // Verificando si hay errores
+  if (errorData) {
+    return response.json(errorData);
+  }
+  // En caso de no existir errores creamos el usuario
+  try {
+    // 1._ Se crea una instancia del modelo User mediante la funcion create
+    const user = await User.create(userFormData);
+    log.info(`Usuario Creado: ${JSON.stringify(user)}`);
+    // 2._ Se contesta al cliente con el usuario creado
+    return response.status(200).json(user.toJSON());
+  } catch (error) {
+    log.error(error);
+    return response.json({
+      message: error.message,
+      name: error.name,
+      errors: error.errors,
+    });
+  }
 };
 
 // Controlador Login

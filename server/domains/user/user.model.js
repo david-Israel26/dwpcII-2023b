@@ -1,13 +1,20 @@
 // Importando Mongoose
 import mongoose from 'mongoose';
+
 // Al terminar la validacion del correo
 // Se valida el password - npm i validator@13.11.0
 import validator from 'validator';
+
 // Al terminar de agregar el timestamp se importa
 // la encriptacion de la contraseña con bcrypt (npm install bcrypt)
 import bcrypt from 'bcrypt';
+
 // Al terminar la encriptacion se genera el token de confirmacion
 import crypto from 'crypto';
+
+// Unique Validator de Mongoose - npm i mongoose-unique-validator
+import uniqueValidator from 'mongoose-unique-validator';
+
 // Desestructurando la funcion Schema
 const { Schema } = mongoose;
 // Creando el esquema
@@ -59,6 +66,9 @@ const UserSchema = new Schema(
   { timestamps: true }
 );
 
+// Añadiendo plugins al Schema
+UserSchema.plugin(uniqueValidator);
+
 // Metodos de instancia
 UserSchema.methods = {
   // Metodo para encriptar la contraseña
@@ -68,6 +78,19 @@ UserSchema.methods = {
   // Generacion de un token con crypto
   generateConfirmationToken() {
     return crypto.randomBytes(64).toString('hex');
+  },
+  // Funcion transformadora a JSON personalizado
+  toJSON() {
+    return {
+      id: this._id,
+      firstName: this.firstName,
+      lastname: this.lastname,
+      mail: this.mail,
+      emailConfirmationToken: this.emailConfirmationToken,
+      emailConfirmationAt: this.emailConfirmationAt,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+    };
   },
 };
 
