@@ -58,6 +58,13 @@ const UserSchema = new Schema(
         message: 'Es necesario ingresar una contraseña "fuerte"',
       },
     },
+    // Agregando una propiedad rol
+    role: {
+      type: String,
+      enum: ['user', 'admin'],
+      message: '{VALUE} no es un rol valido',
+      default: 'user',
+    },
     emailConfirmationToken: String,
     emailConfirmationAt: Date,
   },
@@ -86,6 +93,7 @@ UserSchema.methods = {
       firstName: this.firstName,
       lastname: this.lastname,
       mail: this.mail,
+      role: this.role,
       emailConfirmationToken: this.emailConfirmationToken,
       emailConfirmationAt: this.emailConfirmationAt,
       createdAt: this.createdAt,
@@ -106,4 +114,4 @@ UserSchema.pre('save', function presave(next) {
 });
 
 // Compilando el modelo y exportandolo
-export default mongoose.model('user', UserSchema);
+export default mongoose.model('usr', UserSchema);
